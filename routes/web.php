@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Blog;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,13 +13,18 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 //Home Route
 Route::get('/', function () {
-    return view('blogs');
+    $posts = Blog::get();
+
+    return view('blogs',['posts' => $posts]);
 });
 
 //Blog Route
-Route::get('blog', function () {
-    return view('blog');
-});
+Route::get('blog/{post:slug}', function (BLog $post) {
+    
+    //$post = Blog::find($post_id);
 
+    return view('blog', ['post' => $post]);
+});
