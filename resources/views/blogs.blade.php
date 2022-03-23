@@ -12,6 +12,8 @@
          <center> MY BLOG</center>
          </h1>
       </header>
+   <a href="/blog/create">create post</a>
+
    @foreach($posts as $post)
 
       <article>

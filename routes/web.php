@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Blog;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,10 +22,42 @@ Route::get('/', function () {
     return view('blogs',['posts' => $posts]);
 });
 
+//create post
+Route::get('blog/create', function () {
+
+   return view('create');
+});
+
+//Submit New Blog
+Route::post('blogs/store', function (Request $request) {
+
+    //$post = new Blog;
+    //$post->slug = $request->slug;
+    //$post->title = $request->title;
+    //$post->excerpt = $request->excerpt;
+    //$post->body = $request->body;
+
+    //$post->save();
+
+Blog::create([
+    'slug' => $request->slug,
+    'title' => $request->title,
+    'excerpt' => $request->excerpt,
+    'body' => $request->body,
+]);
+
+    return redirect()->to('/');
+});
+    
 //Blog Route
 Route::get('blog/{post:slug}', function (BLog $post) {
-    
-    //$post = Blog::find($post_id);
 
     return view('blog', ['post' => $post]);
 });
+
+
+
+
+
+
+
